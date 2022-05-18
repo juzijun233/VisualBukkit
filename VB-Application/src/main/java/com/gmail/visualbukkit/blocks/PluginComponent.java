@@ -1,5 +1,6 @@
 package com.gmail.visualbukkit.blocks;
 
+import com.gmail.visualbukkit.VisualBukkitApp;
 import com.gmail.visualbukkit.blocks.parameters.BlockParameter;
 import com.gmail.visualbukkit.project.BuildContext;
 import com.gmail.visualbukkit.project.ProjectManager;
@@ -56,6 +57,8 @@ public non-sealed abstract class PluginComponent extends BlockDefinition {
             statementHolder = new StatementHolder(this, statementConnector);
 
             tab = new Tab(pluginComponent.getTitle(), new Pane());
+            tab.setOnClosed(e -> NotificationManager.displayMessage(LanguageManager.get("message.component_close.title"), LanguageManager.get("message.component_close.content")));
+
             openButton = new Button();
             openButton.textProperty().bind(tab.textProperty());
             openButton.setOnAction(e -> ProjectManager.getCurrentProject().openPluginComponent(this));
